@@ -1,15 +1,17 @@
-cmake_minimum_required(VERSION 3.24)
-project(OrionEngine)
+cmake_minimum_required(VERSION 4.0)
 
-set(CMAKE_CXX_STANDARD 20)
+project(OrionEngine LANGUAGES CXX)
 
-# Добавление SDL в проект
-set(SDL_SHARED OFF CACHE BOOL "" FORCE)
-set(SDL_STATIC ON CACHE BOOL "" FORCE)
-add_subdirectory(external/SDL)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Добавление volk в проект
-add_subdirectory(external/volk)
 
-add_subdirectory(src)
+# External libraries
+add_subdirectory(external)
 
+# Engine library
+add_subdirectory(engine)
+
+# Main applications utilizing the Orion game engine
+add_subdirectory(editor)
+add_subdirectory(player)
