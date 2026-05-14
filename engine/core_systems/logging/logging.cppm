@@ -6,7 +6,6 @@ export module orion.logging;
 
 export namespace orion::logging
 {
-
     template<typename... Args>
     void trace(spdlog::format_string_t<Args...> fmt, Args&&... args)
     {

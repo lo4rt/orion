@@ -1,19 +1,18 @@
-module;
-
-#include <iostream>
-
 export module orion.engine;
 
 #include <core_systems/logging/logging.h>
 
-namespace Orion
+
+namespace orion
 {
-    export class Engine
+    export class engine
     {
     public:
         void initialize()
         {
-            LOG_INFO("Initializing engine...");
+
+
+
             LOG_INFO("Engine initialized successfully.");
         }
         void run()

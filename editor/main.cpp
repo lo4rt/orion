@@ -4,7 +4,7 @@ import orion.engine;
 
 int main()
 {
-    Orion::Engine engine;
+    orion::engine engine;
     engine.initialize();
     engine.run();
     engine.shutdown();
