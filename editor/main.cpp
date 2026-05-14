@@ -1,10 +1,10 @@
 #include <iostream>
 
-import engine;
+import orion.engine;
 
 int main()
 {
-    Engine engine;
+    Orion::Engine engine;
     engine.initialize();
     engine.run();
     engine.shutdown();

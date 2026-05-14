@@ -3,11 +3,28 @@ target_link_libraries(orion-engine
     PRIVATE
         SDL3::SDL3
         volk::volk
+        spdlog::spdlog
 )
-target_sources(orion-engine
+
+target_include_directories(orion-engine
     PUBLIC
-        FILE_SET CXX_MODULES FILES
-            engine.cppm
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_compile_definitions(orion-engine
+    PUBLIC
+        $<$<CONFIG:Debug>:ORION_ENABLE_TRACE_LOGS>
+)
+
+target_sources(orion-engine
+    PUBLIC FILE_SET CXX_MODULES FILES
+        engine.cppm
+)
+
+# logging module
+target_sources(orion-engine
+    PUBLIC FILE_SET CXX_MODULES FILES
+        core_systems/logging/logging.cppm
     PRIVATE
-        engine.cpp
+        core_systems/logging/logging.h
 )

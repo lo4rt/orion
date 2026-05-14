@@ -5,3 +5,5 @@ set(SDL_STATIC ON CACHE BOOL "" FORCE)
 add_subdirectory(SDL)
 
 add_subdirectory(volk)
+
+add_subdirectory(spdlog)
