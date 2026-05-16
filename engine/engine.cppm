@@ -15,59 +15,40 @@ namespace orng
     export class engine_t
     {
     public:
-        void process_event(const SDL_Event& event)
-        {
-            switch (event.type)
-            {
-                default:
-                    break;
-            }
-        }
-
-        void update_all_systems(float delta_time)
-        {
-
-        }
-
-        void render()
-        {
-
-        }
-
-
-    private:
-        std::expected<void, std::string> initialize_core_systems()
-        {
-            if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
-            {
-                return std::unexpected(std::string("Failed to initialize SDL: ") + SDL_GetError());
-            }
-            return {};
-        }
+        visual_system_t visual_system;
 
     public:
-        std::expected<void, std::string> initialize()
+        std::expected<void, std::string> initialize(SDL_Window* window)
         {
-            auto core_systems_result = initialize_core_systems();
-            if (!core_systems_result) { return std::unexpected(core_systems_result.error()); }
+            if (auto init_result = initialize_core_systems(); !init_result)
+                return std::unexpected(init_result.error());
 
+            if (auto init_result = visual_system.initialize(window); !init_result)
+                return std::unexpected(init_result.error());
 
             ORLOG_INFO("Engine initialized successfully. All systems are ready.");
             return {};
         }
-        
+    private:
+        std::expected<void, std::string> initialize_core_systems()
+        {
+            orng::logging::initialize();
+
+
+            return {};
+        }
+
+    public:
         void shutdown()
         {
             ORLOG_INFO("Shutting down engine...");
-            SDL_Quit();
         }
 
-    private:
-        visual_system_t visual_system;
     public:
-        visual_system_t& get_visual_system()
+        void update_all_systems(float delta_time)
         {
-            return visual_system;
+            visual_system.draw_frame();
+
         }
     };
 }

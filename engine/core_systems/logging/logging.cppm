@@ -6,6 +6,13 @@ export module orion.engine.logging;
 
 export namespace orng::logging
 {
+
+    void initialize()
+    {
+        spdlog::set_pattern("[%H:%M:%S.%e][%^%l%$] %v");
+        spdlog::set_level(spdlog::level::trace);
+    }
+
     template<typename... Args>
     void trace(spdlog::format_string_t<Args...> fmt, Args&&... args)
     {
