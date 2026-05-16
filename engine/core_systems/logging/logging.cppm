@@ -2,9 +2,9 @@ module;
 
 #include <spdlog/spdlog.h>
 
-export module orion.logging;
+export module orion.engine.logging;
 
-export namespace orion::logging
+export namespace orng::logging
 {
     template<typename... Args>
     void trace(spdlog::format_string_t<Args...> fmt, Args&&... args)
@@ -41,5 +41,4 @@ export namespace orion::logging
     {
         spdlog::critical(fmt, std::forward<Args>(args)...);
     }
-
 }
